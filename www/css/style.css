@@ -1,0 +1,4 @@
+.strike {
+    text-decoration: line-through;    /*we're replacing the default line-through*/
+   
+}

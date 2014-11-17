@@ -1,0 +1,29 @@
+<ion-view hide-back-button="true" title="" ng-controller="ToDoController">
+  <ion-header-bar class="bar-stable">
+    <h1 class="title">Simple Todo</h1>
+    <button class="button button-icon icon ion-plus-circled" ng-click="addNewItem()"></button>
+  </ion-header-bar>
+  <div class="bar bar-subheader">
+    <!-- Search Box -->
+    <div class="item-input">
+      <i class="icon ion-search placeholder-icon"></i>
+      <input class="input" type="text" placeholder="Search task..." ng-model="search.text" />
+    </div>
+  </div>
+  <ion-content style="padding-top: 47px" has-bouncing="false">
+    <!-- In-Progress Tasks -->
+    <div class="item-divider padding">In-progress tasks <span ng-hide="!taskCount()" class="badge badge-assertive">{{taskCount()}}</span></div>
+    <ul class="list">
+      <ion-checkbox ng-repeat="item in todoList | filter:search.text" ng-if="!item.done" ng-checked="item.done" ng-click="checkDone($index)">{{item.title}}</ion-checkbox>
+      <li class="col" ng-hide="taskCount()" style="text-align: center; color: #CCC;">Wow! You have no task. Let's add some!</li>
+    </ul>
+    <!-- Done Tasks -->
+    <div class="item-divider padding">Done tasks</div>
+    <ul class="list">
+      <li class="item item-icon-left strike" ng-repeat="item in todoList | filter:search.text" ng-if="item.done" ng-click="restoreTask($index)">
+        <i class="icon ion-ios7-checkmark"></i>
+        {{item.title}}
+      </li>
+    </ul>
+  </ion-content>    
+</ion-view>
